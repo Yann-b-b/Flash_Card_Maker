@@ -81,7 +81,7 @@ class Server:
                         get_summary_from_prompt(message.content)
                     ).to_json()
                 )
-            ) if message.type == "ping" else None
+            )
         )
 
         while self.server.running:

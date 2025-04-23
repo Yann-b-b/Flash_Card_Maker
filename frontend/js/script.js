@@ -4,13 +4,16 @@ ws.onopen = () => log("Connected to server");
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
   const flashcards = data?.data?.message;
+  console.log("Received flashcards:", flashcards);
   if (Array.isArray(flashcards)) {
     let currentIndex = 0;
     const container = document.getElementById("flashcardContainer");
+    console.log("flashcardContainer found:", container);
 
     const renderCard = () => {
       container.innerHTML = "";
       const { front, back } = flashcards[currentIndex];
+      console.log("Rendering:", front, back);
       const card = document.createElement("div");
       card.className = "flashcard";
       card.setAttribute("tabindex", "0");
@@ -21,10 +24,13 @@ ws.onmessage = (event) => {
         </div>
       `;
       container.appendChild(card);
+      console.log("Card injected into DOM");
     };
 
     renderCard();
     document.getElementById("loading").style.display = "none";
+    document.getElementById("overlay").style.height = "0%";
+    document.getElementById("overlay").style.opacity = "0";
 
     document.getElementById("prevBtn").onclick = () => {
       if (currentIndex > 0) {
@@ -51,6 +57,8 @@ function sendMessage() {
     <span>⏳</span><span> </span><span>G</span><span>e</span><span>n</span><span>e</span><span>r</span><span>a</span><span>t</span><span>i</span><span>n</span><span>g</span><span> </span><span>.</span><span>.</span><span>.</span>
   `;
   document.getElementById("loading").style.display = "block";
+  document.getElementById("overlay").style.height = "200%";
+  document.getElementById("overlay").style.opacity = "1";
   const msg = JSON.stringify({
     type: "ping",
     data: { message: input },
