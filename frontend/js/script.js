@@ -13,6 +13,7 @@ ws.onmessage = (event) => {
       const { front, back } = flashcards[currentIndex];
       const card = document.createElement("div");
       card.className = "flashcard";
+      card.setAttribute("tabindex", "0");
       card.innerHTML = `
         <div class="flashcard-inner">
           <div class="front">${front}</div>
@@ -23,6 +24,7 @@ ws.onmessage = (event) => {
     };
 
     renderCard();
+    document.getElementById("loading").style.display = "none";
 
     document.getElementById("prevBtn").onclick = () => {
       if (currentIndex > 0) {
@@ -45,6 +47,10 @@ ws.onclose = () => log("Disconnected");
 
 function sendMessage() {
   const input = document.getElementById("inputBox").value;
+  document.getElementById("loading").innerHTML = `
+    <span>⏳</span><span> </span><span>G</span><span>e</span><span>n</span><span>e</span><span>r</span><span>a</span><span>t</span><span>i</span><span>n</span><span>g</span><span> </span><span>.</span><span>.</span><span>.</span>
+  `;
+  document.getElementById("loading").style.display = "block";
   const msg = JSON.stringify({
     type: "ping",
     data: { message: input },
@@ -62,6 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".flashcard");
       if (card) card.classList.toggle("flipped");
+    });
+    // Accessibility: keyboard toggle for flipping
+    container.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        const card = e.target.closest(".flashcard");
+        if (card) {
+          card.classList.toggle("flipped");
+          e.preventDefault();
+        }
+      }
     });
   }
 });

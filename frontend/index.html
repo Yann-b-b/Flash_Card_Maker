@@ -2,25 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WebSocket Client</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h2>Flashcard Maker</h2>
-  <p style="max-width: 600px; margin-bottom: 1em;">
-    ⚠️ Your input should be under <strong>~5,800 words</strong> to account for model limits and the embedded few-shot prompt (~200 words).
-    This generator uses the <strong>llama3.1:latest (7B)</strong> model, which supports up to 8,192 tokens.
-  </p>
-  <form onsubmit="event.preventDefault(); sendMessage();">
-    <label for="inputBox">Enter text to generate flashcards:</label><br />
-    <input type="text" id="inputBox" placeholder="Type your text here..." />
-    <button type="submit">Generate</button>
-  </form>
-  <pre id="log"></pre>
-  <div id="flashcardContainer" class="flashcard-container"></div>
-  <div class="navigation-buttons">
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
+  <div style="max-width: 700px; width: 90%; margin: auto; padding: 1em;">
+    <h1 style="margin-top: 1em; font-size: 2em; color: #333;">Flashcard Maker</h1>
+    <p style="max-width: 600px; margin-bottom: 1em;">
+      ⚠️ Your input should be under <strong>~5,800 words</strong> to account for model limits and the embedded few-shot prompt (~200 words).
+      This generator uses the <strong>llama3.1:latest (7B)</strong> model, which supports up to 8,192 tokens.
+    </p>
+    <form onsubmit="event.preventDefault(); sendMessage();" style="margin-bottom: 1em;">
+      <label for="inputBox" style="font-weight: bold;">Enter text to generate flashcards:</label><br />
+      <input type="text" id="inputBox" placeholder="Type your text here..." />
+      <button type="submit">Generate</button>
+    </form>
+    <pre id="log" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
+    <div id="loading">
+      <span>⏳</span><span> </span><span>G</span><span>e</span><span>n</span><span>e</span><span>r</span><span>a</span><span>t</span><span>i</span><span>n</span><span>g</span><span> </span><span>.</span><span>.</span><span>.</span>
+    </div>
+    <div id="flashcardContainer" class="flashcard-container"></div>
+    <div class="navigation-buttons">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
   </div>
   <script src="js/script.js"></script>
 </body>
