@@ -6,19 +6,21 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h2>Flashcard Maker WebSocket Client</h2>
-  <input type="text" id="inputBox" placeholder="Enter text to summarize" />
-  <button onclick="sendMessage()">Summarize</button>
+  <h2>Flashcard Maker</h2>
+  <p style="max-width: 600px; margin-bottom: 1em;">
+    ⚠️ Your input should be under <strong>~5,800 words</strong> to account for model limits and the embedded few-shot prompt (~200 words).
+    This generator uses the <strong>llama3.1:latest (7B)</strong> model, which supports up to 8,192 tokens.
+  </p>
+  <form onsubmit="event.preventDefault(); sendMessage();">
+    <label for="inputBox">Enter text to generate flashcards:</label><br />
+    <input type="text" id="inputBox" placeholder="Type your text here..." />
+    <button type="submit">Generate</button>
+  </form>
   <pre id="log"></pre>
-  <div class="flashcard-container">
-    <div class="flashcard">
-      <div class="front">
-        Front Text
-      </div>
-      <div class="back">
-        Back Text
-      </div>
-    </div>
+  <div id="flashcardContainer" class="flashcard-container"></div>
+  <div class="navigation-buttons">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
   </div>
   <script src="js/script.js"></script>
 </body>
