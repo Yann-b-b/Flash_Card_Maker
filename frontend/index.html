@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebSocket Client</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <h2>Flashcard Maker WebSocket Client</h2>
+  <input type="text" id="inputBox" placeholder="Enter text to summarize" />
+  <button onclick="sendMessage()">Summarize</button>
+  <pre id="log"></pre>
+  <div class="flashcard-container">
+    <div class="flashcard">
+      <div class="front">
+        Front Text
+      </div>
+      <div class="back">
+        Back Text
+      </div>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
