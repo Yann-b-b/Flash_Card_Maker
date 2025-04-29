@@ -51,14 +51,24 @@ ws.onmessage = (event) => {
 };
 ws.onclose = () => log("Disconnected");
 
+let overlayStep = 0;
+const gradients = [
+  "linear-gradient(to top, rgba(0, 0, 255, 0.6) 0%, rgba(0, 0, 255, 0.2) 25%, rgba(0, 128, 128, 0.4) 50%, rgba(255, 165, 0, 0.3) 75%, rgba(255, 105, 180, 0.3) 100%)"
+];
+
 function sendMessage() {
   const input = document.getElementById("inputBox").value;
   document.getElementById("loading").innerHTML = `
     <span>⏳</span><span> </span><span>G</span><span>e</span><span>n</span><span>e</span><span>r</span><span>a</span><span>t</span><span>i</span><span>n</span><span>g</span><span> </span><span>.</span><span>.</span><span>.</span>
   `;
   document.getElementById("loading").style.display = "block";
-  document.getElementById("overlay").style.height = "200%";
-  document.getElementById("overlay").style.opacity = "1";
+
+  const overlay = document.getElementById("overlay");
+  overlay.style.height = "200%";
+  overlay.style.opacity = "1";
+  overlay.style.background = gradients[overlayStep % gradients.length];
+  overlayStep++;
+
   const msg = JSON.stringify({
     type: "ping",
     data: { message: input },

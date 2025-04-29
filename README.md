@@ -20,7 +20,7 @@ This is a modular flashcard generation project powered by LLMs.
       ```
     - Run the server:
       ```bash
-      python socket_server.py
+      python server.py
       ```
 
 2. **Run the Frontend**
